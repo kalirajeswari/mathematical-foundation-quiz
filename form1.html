@@ -1,0 +1,1939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mathematical Foundation | Online Quiz</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root{
+    --primary:#4f46e5;
+    --primary2:#6366f1;
+    --cyan:#0891b2;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --text:#172033;
+    --muted:#64748b;
+    --border:#e2e8f0;
+    --light:#f8fafc;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    min-height:100vh;
+    font-family:"Inter",Arial,sans-serif;
+    color:var(--text);
+    background:
+        radial-gradient(circle at 10% 10%,rgba(79,70,229,.22),transparent 28%),
+        radial-gradient(circle at 90% 20%,rgba(8,145,178,.18),transparent 25%),
+        linear-gradient(135deg,#eef2ff,#f8fafc,#ecfeff);
+    padding:25px 15px;
+}
+
+.app{
+    width:min(980px,100%);
+    margin:auto;
+}
+
+.screen{
+    display:none;
+}
+
+.screen.active{
+    display:block;
+}
+
+.card{
+    background:rgba(255,255,255,.96);
+    border-radius:28px;
+    overflow:hidden;
+    box-shadow:0 25px 70px rgba(15,23,42,.14);
+}
+
+/* ================= HERO ================= */
+
+.hero{
+    padding:35px;
+    color:white;
+    background:linear-gradient(135deg,#312e81,#4f46e5 55%,#0891b2);
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:30px;
+    background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.2);
+    font-size:11px;
+    font-weight:700;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.hero h1{
+    font-size:clamp(28px,5vw,42px);
+    margin-top:15px;
+}
+
+.hero p{
+    margin-top:8px;
+    color:rgba(255,255,255,.82);
+}
+
+.content{
+    padding:32px;
+}
+
+/* ================= CREATOR ================= */
+
+.creator{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:28px;
+}
+
+.creator-box{
+    padding:16px;
+    background:var(--light);
+    border:1px solid var(--border);
+    border-radius:15px;
+}
+
+.creator-box span{
+    display:block;
+    font-size:10px;
+    color:var(--muted);
+    font-weight:700;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.creator-box strong{
+    display:block;
+    margin-top:6px;
+    font-size:14px;
+}
+
+/* ================= FORM ================= */
+
+.title{
+    font-size:24px;
+    font-weight:800;
+}
+
+.subtitle{
+    color:var(--muted);
+    margin-top:6px;
+    font-size:14px;
+}
+
+.form{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin-top:24px;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.field input{
+    width:100%;
+    padding:14px;
+    border:1px solid var(--border);
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+.field input:focus{
+    border-color:var(--primary);
+    box-shadow:0 0 0 4px rgba(79,70,229,.1);
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+    border:0;
+    border-radius:12px;
+    padding:14px 18px;
+    font-size:14px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+.primary{
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:white;
+    box-shadow:0 10px 25px rgba(79,70,229,.2);
+}
+
+.success{
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+    color:white;
+}
+
+.gray{
+    background:#f1f5f9;
+    color:#334155;
+}
+
+.full{
+    width:100%;
+    margin-top:20px;
+}
+
+.error{
+    display:none;
+    color:var(--danger);
+    font-size:13px;
+    font-weight:600;
+    margin-top:10px;
+}
+
+/* ================= LOGIN CREDENTIALS ================= */
+
+.login-info{
+    margin-top:18px;
+    padding:16px 18px;
+    border-radius:14px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    text-align:center;
+    font-size:13px;
+    color:#475569;
+}
+
+.login-info strong{
+    display:block;
+    color:#4f46e5;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.login-info p{
+    margin:5px 0;
+}
+
+.login-info b{
+    color:#172033;
+}
+
+/* ================= UNIT ================= */
+
+.units{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    margin:28px 0;
+}
+
+.unit{
+    position:relative;
+    padding:27px;
+    border:2px solid var(--border);
+    border-radius:22px;
+    cursor:pointer;
+    transition:.2s;
+    background:white;
+}
+
+.unit:hover{
+    transform:translateY(-4px);
+    border-color:#a5b4fc;
+    box-shadow:0 15px 30px rgba(79,70,229,.1);
+}
+
+.unit.selected{
+    border-color:var(--primary);
+    background:#eef2ff;
+}
+
+.unit-icon{
+    font-size:32px;
+}
+
+.unit h3{
+    margin-top:14px;
+    font-size:19px;
+}
+
+.unit p{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+    margin-top:8px;
+}
+
+.check{
+    position:absolute;
+    top:17px;
+    right:17px;
+    width:26px;
+    height:26px;
+    border-radius:50%;
+    border:2px solid #cbd5e1;
+    display:grid;
+    place-items:center;
+    color:transparent;
+    font-weight:bold;
+}
+
+.unit.selected .check{
+    background:var(--primary);
+    border-color:var(--primary);
+    color:white;
+}
+
+/* ================= QUIZ ================= */
+
+.quiz{
+    padding:25px;
+}
+
+.quiz-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+}
+
+.quiz-name{
+    font-size:19px;
+    font-weight:800;
+}
+
+.quiz-info{
+    color:var(--muted);
+    font-size:12px;
+    margin-top:5px;
+}
+
+.timer{
+    min-width:125px;
+    padding:12px 15px;
+    text-align:center;
+    border-radius:14px;
+    color:#c2410c;
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    font-weight:800;
+}
+
+.timer.warning{
+    color:var(--danger);
+    background:#fef2f2;
+    border-color:#fecaca;
+}
+
+.progress-track{
+    height:8px;
+    background:#e2e8f0;
+    border-radius:50px;
+    overflow:hidden;
+    margin:22px 0;
+}
+
+.progress-bar{
+    height:100%;
+    width:0;
+    background:linear-gradient(90deg,var(--primary),var(--cyan));
+    transition:.3s;
+}
+
+.stats{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.stat{
+    padding:8px 11px;
+    border:1px solid var(--border);
+    background:var(--light);
+    border-radius:9px;
+    font-size:12px;
+    color:var(--muted);
+}
+
+.stat strong{
+    color:var(--text);
+}
+
+.question-card{
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:25px;
+}
+
+.q-label{
+    font-size:11px;
+    color:var(--primary);
+    font-weight:800;
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.question{
+    margin-top:10px;
+    font-size:20px;
+    font-weight:700;
+    line-height:1.55;
+}
+
+.options{
+    display:grid;
+    gap:12px;
+    margin-top:22px;
+}
+
+.option{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    padding:15px;
+    border:1px solid var(--border);
+    border-radius:14px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.option:hover{
+    border-color:#a5b4fc;
+    background:#fafaff;
+}
+
+.option.selected{
+    background:#eef2ff;
+    border-color:var(--primary);
+}
+
+.option-letter{
+    width:29px;
+    height:29px;
+    min-width:29px;
+    display:grid;
+    place-items:center;
+    border-radius:8px;
+    background:#f1f5f9;
+    font-size:12px;
+    font-weight:800;
+}
+
+.option.selected .option-letter{
+    background:var(--primary);
+    color:white;
+}
+
+.option-text{
+    font-size:14px;
+    line-height:1.55;
+    padding-top:4px;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+    margin-top:18px;
+}
+
+.actions .btn{
+    flex:1;
+}
+
+#submitBtn{
+    display:none;
+}
+
+.notice{
+    margin-top:15px;
+    padding:12px 14px;
+    border-radius:12px;
+    background:#fffbeb;
+    border:1px solid #fde68a;
+    color:#92400e;
+    font-size:12px;
+    line-height:1.5;
+}
+
+/* ================= RESULT ================= */
+
+.result-top{
+    padding:38px;
+    text-align:center;
+    color:white;
+    background:linear-gradient(135deg,#312e81,#4f46e5,#0891b2);
+}
+
+.result-score{
+    font-size:65px;
+    font-weight:800;
+    margin:15px 0 5px;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:25px 0;
+}
+
+.result-box{
+    padding:20px;
+    text-align:center;
+    border:1px solid var(--border);
+    border-radius:16px;
+}
+
+.result-box span{
+    display:block;
+    color:var(--muted);
+    font-size:12px;
+}
+
+.result-box strong{
+    display:block;
+    font-size:25px;
+    margin-top:6px;
+}
+
+.center{
+    text-align:center;
+}
+
+.small{
+    font-size:12px;
+    color:var(--muted);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:700px){
+
+    body{
+        padding:12px;
+    }
+
+    .hero{
+        padding:27px 22px;
+    }
+
+    .content{
+        padding:24px 20px;
+    }
+
+    .creator{
+        grid-template-columns:1fr;
+    }
+
+    .form{
+        grid-template-columns:1fr;
+    }
+
+    .units{
+        grid-template-columns:1fr;
+    }
+
+    .quiz{
+        padding:17px;
+    }
+
+    .quiz-header{
+        flex-direction:column;
+        align-items:stretch;
+    }
+
+    .timer{
+        width:100%;
+    }
+
+    .question{
+        font-size:18px;
+    }
+
+    .actions{
+        flex-direction:column;
+    }
+
+    .result-grid{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- =====================================================
+                     LOGIN PAGE
+====================================================== -->
+
+<section id="loginPage" class="screen active">
+
+<div class="card">
+
+    <div class="hero">
+        <span class="badge">Online Assessment</span>
+
+        <h1>Mathematical Foundation</h1>
+
+        <p>Unit-wise Online Quiz</p>
+    </div>
+
+    <div class="content">
+
+        <div class="creator">
+
+            <div class="creator-box">
+                <span>Created By</span>
+                <strong>S.KALIRAJESWARI</strong>
+            </div>
+
+            <div class="creator-box">
+                <span>Roll No</span>
+                <strong>26PCA109</strong>
+            </div>
+
+            <div class="creator-box">
+                <span>Subject</span>
+                <strong>Mathematical Foundation</strong>
+            </div>
+
+        </div>
+
+        <h2 class="title">Candidate Login</h2>
+
+        <p class="subtitle">
+            Enter your username and password to continue.
+        </p>
+
+        <div class="form">
+
+            <div class="field">
+                <label>Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    placeholder="Enter username"
+                >
+            </div>
+
+            <div class="field">
+                <label>Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter password"
+                >
+            </div>
+
+        </div>
+
+        <button
+            class="btn primary full"
+            onclick="login()"
+        >
+            LOGIN →
+        </button>
+
+        <!-- LOGIN CREDENTIALS -->
+
+        <div class="login-info">
+
+            <strong>🔐 Login Credentials</strong>
+
+            <p>
+                Username:
+                <b>quizuser</b>
+            </p>
+
+            <p>
+                Password:
+                <b>maths123</b>
+            </p>
+
+        </div>
+
+        <div id="loginError" class="error">
+            Invalid username or password.
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+                  UNIT SELECTION PAGE
+====================================================== -->
+
+<section id="unitPage" class="screen">
+
+<div class="card">
+
+    <div class="hero">
+
+        <span class="badge">Step 2 of 3</span>
+
+        <h1>Select Unit</h1>
+
+        <p>
+            Choose the unit you want to attend.
+        </p>
+
+    </div>
+
+    <div class="content">
+
+        <div class="units">
+
+            <!-- UNIT II -->
+
+            <div
+                class="unit"
+                id="unit1"
+                onclick="selectUnit(1)"
+            >
+
+                <div class="check">✓</div>
+
+                <div class="unit-icon">∑</div>
+
+                <h3>Unit II — Boolean Algebra</h3>
+
+                <p>
+                    Boolean functions, identities, duality,
+                    SOP/POS, functional completeness,
+                    minimization, Karnaugh map and
+                    Quine–McCluskey method.
+                </p>
+
+            </div>
+
+
+            <!-- UNIT III -->
+
+            <div
+                class="unit"
+                id="unit2"
+                onclick="selectUnit(2)"
+            >
+
+                <div class="check">✓</div>
+
+                <div class="unit-icon">🌳</div>
+
+                <h3>Unit III — Trees</h3>
+
+                <p>
+                    Rooted trees, ordered rooted trees,
+                    representations, computer file systems,
+                    connected parallel processors,
+                    applications of trees and binary search trees.
+                </p>
+
+            </div>
+
+        </div>
+
+        <button
+            class="btn primary full"
+            onclick="startQuiz()"
+        >
+            START QUIZ →
+        </button>
+
+        <div id="unitError" class="error">
+            Please select a unit.
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+                     QUIZ PAGE
+====================================================== -->
+
+<section id="quizPage" class="screen">
+
+<div class="card">
+
+<div class="quiz">
+
+    <div class="quiz-header">
+
+        <div>
+
+            <div
+                class="quiz-name"
+                id="quizUnitName"
+            >
+                Unit Quiz
+            </div>
+
+            <div class="quiz-info">
+                Mathematical Foundation • 20 Questions
+            </div>
+
+        </div>
+
+        <div
+            class="timer"
+            id="timer"
+        >
+            20:00
+        </div>
+
+    </div>
+
+
+    <!-- Progress -->
+
+    <div class="progress-track">
+
+        <div
+            class="progress-bar"
+            id="progressBar"
+        ></div>
+
+    </div>
+
+
+    <!-- Statistics -->
+
+    <div class="stats">
+
+        <div class="stat">
+            Question
+            <strong id="currentNumber">1</strong>
+            /
+            <strong>20</strong>
+        </div>
+
+        <div class="stat">
+            Remaining
+            <strong id="remaining">19</strong>
+        </div>
+
+        <div class="stat">
+            Answered
+            <strong id="answered">0</strong>
+        </div>
+
+    </div>
+
+
+    <!-- Question -->
+
+    <div class="question-card">
+
+        <div
+            class="q-label"
+            id="qLabel"
+        >
+            Question 01
+        </div>
+
+        <div
+            class="question"
+            id="questionText"
+        ></div>
+
+        <div
+            class="options"
+            id="options"
+        ></div>
+
+    </div>
+
+
+    <!-- Buttons -->
+
+    <div class="actions">
+
+        <button
+            class="btn gray"
+            id="prevBtn"
+            onclick="previousQuestion()"
+        >
+            ← Previous
+        </button>
+
+        <button
+            class="btn primary"
+            id="nextBtn"
+            onclick="nextQuestion()"
+        >
+            Next →
+        </button>
+
+        <button
+            class="btn success"
+            id="submitBtn"
+            onclick="confirmSubmit()"
+        >
+            Submit Quiz ✓
+        </button>
+
+    </div>
+
+
+    <div class="notice">
+        Select one option for each question.
+        Your quiz will be automatically submitted
+        when the timer reaches zero.
+    </div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =====================================================
+                       RESULT PAGE
+====================================================== -->
+
+<section id="resultPage" class="screen">
+
+<div class="card">
+
+    <div class="result-top">
+
+        <span class="badge">
+            Assessment Completed
+        </span>
+
+        <h1 style="margin-top:15px">
+            Your Result
+        </h1>
+
+        <div
+            class="result-score"
+            id="score"
+        >
+            0 / 20
+        </div>
+
+        <p id="resultMessage">
+            Quiz completed!
+        </p>
+
+    </div>
+
+
+    <div class="content">
+
+        <div class="result-grid">
+
+            <div class="result-box">
+                <span>Correct Answers</span>
+                <strong id="correct">0</strong>
+            </div>
+
+            <div class="result-box">
+                <span>Wrong / Unanswered</span>
+                <strong id="wrong">0</strong>
+            </div>
+
+            <div class="result-box">
+                <span>Percentage</span>
+                <strong id="percentage">0%</strong>
+            </div>
+
+        </div>
+
+        <p
+            class="center small"
+            id="resultUnit"
+        ></p>
+
+        <button
+            class="btn primary full"
+            onclick="location.reload()"
+        >
+            BACK TO LOGIN
+        </button>
+
+    </div>
+
+</div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+                    LOGIN DETAILS
+====================================================== */
+
+const USERNAME = "quizuser";
+const PASSWORD = "maths123";
+
+
+/* =====================================================
+                  UNIT II QUESTIONS
+               BOOLEAN ALGEBRA
+====================================================== */
+
+const unit2Questions = [
+
+{
+    q:"A Boolean variable can normally take which values?",
+    o:["0 and 1","1 and 2","-1 and 1","0 and 2"],
+    a:0
+},
+
+{
+    q:"A Boolean function is a function whose variables take:",
+    o:["Real values","Boolean values","Complex values","Only negative values"],
+    a:1
+},
+
+{
+    q:"In Boolean algebra, A + B represents:",
+    o:["AND","OR","NOT","XOR"],
+    a:1
+},
+
+{
+    q:"In Boolean algebra, AB represents:",
+    o:["OR","AND","NOT","NOR"],
+    a:1
+},
+
+{
+    q:"The complement of A is represented by:",
+    o:["A + 1","A'","AA","A + A"],
+    a:1
+},
+
+{
+    q:"Which Boolean identity is correct?",
+    o:["A + 0 = A","A + 0 = 0","A · 0 = A","A + 1 = A"],
+    a:0
+},
+
+{
+    q:"What is A · 1 equal to?",
+    o:["0","1","A","A'"],
+    a:2
+},
+
+{
+    q:"What is A + 1 equal to?",
+    o:["0","1","A","A'"],
+    a:1
+},
+
+{
+    q:"What is A · 0 equal to?",
+    o:["A","1","0","A'"],
+    a:2
+},
+
+{
+    q:"What is the dual of A + 0 = A?",
+    o:["A · 1 = A","A + 1 = A","A · 0 = A","A' = A"],
+    a:0
+},
+
+{
+    q:"The principle of duality involves interchanging:",
+    o:[
+        "Variables and constants",
+        "+ with · and 0 with 1",
+        "Variables with operators",
+        "Only complemented variables"
+    ],
+    a:1
+},
+
+{
+    q:"SOP stands for:",
+    o:[
+        "Sum of Products",
+        "System of Products",
+        "Sum of Powers",
+        "Set of Products"
+    ],
+    a:0
+},
+
+{
+    q:"POS stands for:",
+    o:[
+        "Product of Sums",
+        "Power of Sums",
+        "Product of Sets",
+        "Pair of Sums"
+    ],
+    a:0
+},
+
+{
+    q:"In SOP form, product terms are combined using:",
+    o:["AND","OR","NOT","NOR"],
+    a:1
+},
+
+{
+    q:"Functional completeness means that a set of operators can:",
+    o:[
+        "Represent any Boolean function",
+        "Represent only one function",
+        "Remove all variables",
+        "Represent only arithmetic functions"
+    ],
+    a:0
+},
+
+{
+    q:"A Karnaugh map is mainly used for:",
+    o:[
+        "Graph drawing",
+        "Boolean function minimization",
+        "Sorting numbers",
+        "Tree traversal"
+    ],
+    a:1
+},
+
+{
+    q:"Adjacent cells in a Karnaugh map differ in:",
+    o:[
+        "Exactly one variable",
+        "All variables",
+        "No variables",
+        "Two constants"
+    ],
+    a:0
+},
+
+{
+    q:"A don't-care condition in Boolean minimization is commonly represented by:",
+    o:["X","Y","Z","D"],
+    a:0
+},
+
+{
+    q:"The Quine–McCluskey method is used for:",
+    o:[
+        "Boolean minimization",
+        "Tree traversal",
+        "File organization",
+        "Matrix multiplication"
+    ],
+    a:0
+},
+
+{
+    q:"Which is a systematic tabular method for Boolean minimization?",
+    o:[
+        "Binary Search Tree",
+        "Quine–McCluskey method",
+        "Rooted Tree",
+        "Graph traversal"
+    ],
+    a:1
+}
+
+];
+
+
+/* =====================================================
+                     UNIT III QUESTIONS
+                         TREES
+====================================================== */
+
+const unit3Questions = [
+
+{
+    q:"A tree in graph theory is a:",
+    o:[
+        "Connected graph with no cycles",
+        "Graph containing many cycles",
+        "Disconnected graph",
+        "Graph with no vertices"
+    ],
+    a:0
+},
+
+{
+    q:"A rooted tree has a specially designated:",
+    o:["Edge","Root vertex","Leaf edge","Cycle"],
+    a:1
+},
+
+{
+    q:"Vertices directly below a vertex in a rooted tree are called:",
+    o:["Parents","Children","Ancestors","Roots"],
+    a:1
+},
+
+{
+    q:"A vertex with no children is called a:",
+    o:["Root","Leaf","Parent","Branch"],
+    a:1
+},
+
+{
+    q:"A vertex on the path from the root to another vertex is called an:",
+    o:["Ancestor","Sibling","Leaf","Edge"],
+    a:0
+},
+
+{
+    q:"Vertices having the same parent are called:",
+    o:["Ancestors","Siblings","Roots","Descendants"],
+    a:1
+},
+
+{
+    q:"The position of a vertex relative to the root is related to its:",
+    o:["Level or depth","Colour","Cycle","Matrix"],
+    a:0
+},
+
+{
+    q:"An ordered rooted tree specifies:",
+    o:[
+        "An order among the children of each vertex",
+        "Exactly two children for every vertex",
+        "No root",
+        "Only one vertex"
+    ],
+    a:0
+},
+
+{
+    q:"A binary tree allows each vertex to have at most:",
+    o:["1 child","2 children","3 children","4 children"],
+    a:1
+},
+
+{
+    q:"Tree structures are useful for representing:",
+    o:[
+        "Hierarchical relationships",
+        "Only arithmetic equations",
+        "Only Boolean constants",
+        "Only random data"
+    ],
+    a:0
+},
+
+{
+    q:"Computer file systems can be represented naturally using:",
+    o:["Trees","Only cycles","Only matrices","Only lists"],
+    a:0
+},
+
+{
+    q:"In a file-system tree, a folder can be represented as a:",
+    o:["Node/vertex","Cycle","Boolean operator","Karnaugh cell"],
+    a:0
+},
+
+{
+    q:"Organizational structures can be represented using trees because trees show:",
+    o:[
+        "Hierarchical relationships",
+        "Only numerical values",
+        "Boolean identities",
+        "Random ordering"
+    ],
+    a:0
+},
+
+{
+    q:"Connected parallel processor systems can be represented using:",
+    o:[
+        "Tree/network structures",
+        "Only Boolean functions",
+        "Only Karnaugh maps",
+        "Only numerical sequences"
+    ],
+    a:0
+},
+
+{
+    q:"Which is an application of trees?",
+    o:[
+        "File-system organization",
+        "Boolean complementation only",
+        "Decimal addition only",
+        "Password creation only"
+    ],
+    a:0
+},
+
+{
+    q:"A binary search tree is a specialized form of:",
+    o:[
+        "Binary tree",
+        "Cycle graph",
+        "Karnaugh map",
+        "Complete graph"
+    ],
+    a:0
+},
+
+{
+    q:"In a binary search tree, smaller values are normally placed in the:",
+    o:[
+        "Left subtree",
+        "Right subtree",
+        "Root only",
+        "Parent only"
+    ],
+    a:0
+},
+
+{
+    q:"In a binary search tree, larger values are normally placed in the:",
+    o:[
+        "Left subtree",
+        "Right subtree",
+        "Root only",
+        "Sibling list"
+    ],
+    a:1
+},
+
+{
+    q:"Searching in a binary search tree is mainly based on:",
+    o:[
+        "Comparing values",
+        "Counting leaves",
+        "Ignoring node values",
+        "Boolean duality"
+    ],
+    a:0
+},
+
+{
+    q:"Which syllabus topic deals with practical uses of tree structures?",
+    o:[
+        "Applications of Trees",
+        "Duality Principle",
+        "SOP Expansion",
+        "Boolean Identity"
+    ],
+    a:0
+}
+
+];
+
+
+/* =====================================================
+                         VARIABLES
+====================================================== */
+
+let selectedUnit = 0;
+let questions = [];
+let currentQuestion = 0;
+let userAnswers = [];
+let timeLeft = 20 * 60;
+let timerInterval = null;
+let quizSubmitted = false;
+
+
+/* =====================================================
+                     SCREEN CHANGE
+====================================================== */
+
+function showScreen(id){
+
+    document
+        .querySelectorAll(".screen")
+        .forEach(screen=>{
+            screen.classList.remove("active");
+        });
+
+    document
+        .getElementById(id)
+        .classList.add("active");
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+}
+
+
+/* =====================================================
+                         LOGIN
+====================================================== */
+
+function login(){
+
+    const username =
+        document
+        .getElementById("username")
+        .value
+        .trim();
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+    if(
+        username === USERNAME &&
+        password === PASSWORD
+    ){
+
+        document
+            .getElementById("loginError")
+            .style.display="none";
+
+        showScreen("unitPage");
+
+    }
+    else{
+
+        document
+            .getElementById("loginError")
+            .style.display="block";
+
+    }
+}
+
+
+/* ENTER KEY LOGIN */
+
+document
+    .getElementById("password")
+    .addEventListener(
+        "keydown",
+        function(e){
+
+            if(e.key==="Enter"){
+                login();
+            }
+
+        }
+    );
+
+
+/* =====================================================
+                       UNIT SELECT
+====================================================== */
+
+function selectUnit(unit){
+
+    selectedUnit = unit;
+
+    document
+        .getElementById("unit1")
+        .classList
+        .toggle("selected",unit===1);
+
+    document
+        .getElementById("unit2")
+        .classList
+        .toggle("selected",unit===2);
+
+    document
+        .getElementById("unitError")
+        .style.display="none";
+}
+
+
+/* =====================================================
+                      START QUIZ
+====================================================== */
+
+function startQuiz(){
+
+    if(selectedUnit === 0){
+
+        document
+            .getElementById("unitError")
+            .style.display="block";
+
+        return;
+    }
+
+    if(selectedUnit === 1){
+
+        questions = unit2Questions;
+
+        document
+            .getElementById("quizUnitName")
+            .textContent =
+            "Unit II — Boolean Algebra";
+
+    }
+    else{
+
+        questions = unit3Questions;
+
+        document
+            .getElementById("quizUnitName")
+            .textContent =
+            "Unit III — Trees";
+
+    }
+
+    currentQuestion = 0;
+
+    userAnswers =
+        new Array(questions.length).fill(null);
+
+    timeLeft = 20 * 60;
+
+    quizSubmitted = false;
+
+    showScreen("quizPage");
+
+    renderQuestion();
+
+    updateTimer();
+
+    clearInterval(timerInterval);
+
+    timerInterval =
+        setInterval(function(){
+
+            timeLeft--;
+
+            updateTimer();
+
+            if(timeLeft <= 0){
+
+                clearInterval(timerInterval);
+
+                submitQuiz(true);
+
+            }
+
+        },1000);
+}
+
+
+/* =====================================================
+                  DISPLAY QUESTION
+====================================================== */
+
+function renderQuestion(){
+
+    const question =
+        questions[currentQuestion];
+
+    document
+        .getElementById("currentNumber")
+        .textContent =
+        currentQuestion + 1;
+
+    document
+        .getElementById("remaining")
+        .textContent =
+        questions.length -
+        currentQuestion -
+        1;
+
+    document
+        .getElementById("answered")
+        .textContent =
+        userAnswers
+        .filter(x=>x!==null)
+        .length;
+
+    document
+        .getElementById("qLabel")
+        .textContent =
+        "Question " +
+        String(currentQuestion+1)
+        .padStart(2,"0");
+
+    document
+        .getElementById("questionText")
+        .textContent =
+        question.q;
+
+    document
+        .getElementById("progressBar")
+        .style.width =
+        ((currentQuestion+1) /
+        questions.length * 100) + "%";
+
+    const optionContainer =
+        document.getElementById("options");
+
+    optionContainer.innerHTML="";
+
+    const letters=["A","B","C","D"];
+
+    question.o.forEach(function(option,index){
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "option";
+
+        if(
+            userAnswers[currentQuestion]
+            === index
+        ){
+
+            div.classList.add("selected");
+
+        }
+
+        div.innerHTML = `
+
+            <span class="option-letter">
+                ${letters[index]}
+            </span>
+
+            <span class="option-text">
+                ${escapeHTML(option)}
+            </span>
+
+        `;
+
+        div.onclick =
+            function(){
+
+                chooseAnswer(index);
+
+            };
+
+        optionContainer
+            .appendChild(div);
+
+    });
+
+
+    /* Previous */
+
+    document
+        .getElementById("prevBtn")
+        .style.visibility =
+        currentQuestion === 0
+        ? "hidden"
+        : "visible";
+
+
+    /* Next / Submit */
+
+    if(
+        currentQuestion ===
+        questions.length - 1
+    ){
+
+        document
+            .getElementById("nextBtn")
+            .style.display="none";
+
+        document
+            .getElementById("submitBtn")
+            .style.display="block";
+
+    }
+    else{
+
+        document
+            .getElementById("nextBtn")
+            .style.display="block";
+
+        document
+            .getElementById("submitBtn")
+            .style.display="none";
+
+    }
+
+}
+
+
+/* =====================================================
+                    CHOOSE ANSWER
+====================================================== */
+
+function chooseAnswer(index){
+
+    userAnswers[currentQuestion] =
+        index;
+
+    renderQuestion();
+}
+
+
+/* =====================================================
+                     NEXT QUESTION
+====================================================== */
+
+function nextQuestion(){
+
+    if(
+        currentQuestion <
+        questions.length - 1
+    ){
+
+        currentQuestion++;
+
+        renderQuestion();
+
+    }
+}
+
+
+/* =====================================================
+                  PREVIOUS QUESTION
+====================================================== */
+
+function previousQuestion(){
+
+    if(currentQuestion > 0){
+
+        currentQuestion--;
+
+        renderQuestion();
+
+    }
+}
+
+
+/* =====================================================
+                         TIMER
+====================================================== */
+
+function updateTimer(){
+
+    const minutes =
+        Math.floor(timeLeft / 60);
+
+    const seconds =
+        timeLeft % 60;
+
+    const timer =
+        document.getElementById("timer");
+
+    timer.textContent =
+        String(minutes)
+        .padStart(2,"0")
+        +
+        ":"
+        +
+        String(seconds)
+        .padStart(2,"0");
+
+    if(timeLeft <= 120){
+
+        timer.classList.add("warning");
+
+    }
+    else{
+
+        timer.classList.remove("warning");
+
+    }
+}
+
+
+/* =====================================================
+                  SUBMIT CONFIRMATION
+====================================================== */
+
+function confirmSubmit(){
+
+    const unanswered =
+        userAnswers
+        .filter(x=>x===null)
+        .length;
+
+    if(unanswered > 0){
+
+        const confirmResult =
+            confirm(
+                "You have " +
+                unanswered +
+                " unanswered question(s).\n\n" +
+                "Do you want to submit the quiz?"
+            );
+
+        if(!confirmResult){
+            return;
+        }
+
+    }
+
+    submitQuiz(false);
+}
+
+
+/* =====================================================
+                       SUBMIT QUIZ
+====================================================== */
+
+function submitQuiz(autoSubmit){
+
+    if(quizSubmitted){
+        return;
+    }
+
+    quizSubmitted = true;
+
+    clearInterval(timerInterval);
+
+    let correct = 0;
+
+    questions.forEach(function(question,index){
+
+        if(
+            userAnswers[index] ===
+            question.a
+        ){
+
+            correct++;
+
+        }
+
+    });
+
+    const total =
+        questions.length;
+
+    const wrong =
+        total - correct;
+
+    const percentage =
+        Math.round(
+            (correct / total) * 100
+        );
+
+    document
+        .getElementById("score")
+        .textContent =
+        correct + " / " + total;
+
+    document
+        .getElementById("correct")
+        .textContent =
+        correct;
+
+    document
+        .getElementById("wrong")
+        .textContent =
+        wrong;
+
+    document
+        .getElementById("percentage")
+        .textContent =
+        percentage + "%";
+
+    document
+        .getElementById("resultUnit")
+        .textContent =
+        selectedUnit === 1
+        ? "Unit II — Boolean Algebra"
+        : "Unit III — Trees";
+
+
+    if(autoSubmit){
+
+        document
+            .getElementById("resultMessage")
+            .textContent =
+            "Time ended. Quiz submitted automatically.";
+
+    }
+    else if(percentage >= 80){
+
+        document
+            .getElementById("resultMessage")
+            .textContent =
+            "Excellent work!";
+
+    }
+    else if(percentage >= 60){
+
+        document
+            .getElementById("resultMessage")
+            .textContent =
+            "Good effort!";
+
+    }
+    else if(percentage >= 40){
+
+        document
+            .getElementById("resultMessage")
+            .textContent =
+            "Keep practising and try again.";
+
+    }
+    else{
+
+        document
+            .getElementById("resultMessage")
+            .textContent =
+            "Review the topics and try again.";
+
+    }
+
+    showScreen("resultPage");
+}
+
+
+/* =====================================================
+                 SECURITY / HTML ESCAPE
+====================================================== */
+
+function escapeHTML(text){
+
+    return text.replace(
+        /[&<>"']/g,
+        function(char){
+
+            return {
+                "&":"&amp;",
+                "<":"&lt;",
+                ">":"&gt;",
+                '"':"&quot;",
+                "'":"&#039;"
+            }[char];
+
+        }
+    );
+
+}
+
+</script>
+
+</body>
+</html>
